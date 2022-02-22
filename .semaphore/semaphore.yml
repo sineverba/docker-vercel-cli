@@ -1,12 +1,15 @@
 version: v1.0
 
-name: Build and test Pipeline
+name: Test
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 
 global_job_config:
+
+  secrets:
+    - name: ACCESS_TOKENS
 
   prologue:
     commands:
@@ -28,12 +31,11 @@ blocks:
           commands:
             - checkout
             - docker build --tag $DOCKER_USERNAME/$DOCKER_IMAGE .
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE vercel -v | grep "23.1.2"
-      secrets:
-        - name: DOCKER_TOKEN
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE npm -v | grep "8.5.1"
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE vercel -v | grep "24.0.0"
 
 promotions:
   - name: Deploy
-    pipeline_file: production-deploy.yml
+    pipeline_file: build-deploy.yml
     auto_promote:
       when: "result = 'passed' and tag =~ '.*'"

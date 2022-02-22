@@ -1,8 +1,12 @@
+IMAGE_NAME=sineverba/testdockervercel
+CONTAINER_NAME=testdockervercel
+
 build:
-	docker build --tag sineverba/testdockervercel .
+	docker build --tag $(IMAGE_NAME) .
 
 test:
-	docker run --rm -it sineverba/testdockervercel vercel -v | grep "23.1.2"
+	docker run --name $(CONTAINER_NAME) --rm -it $(IMAGE_NAME) npm -v | grep "8.5.1"
+	docker run --name $(CONTAINER_NAME) --rm -it $(IMAGE_NAME) vercel -v | grep "24.0.0"
 
 destroy:
-	docker image rm sineverba/testdockervercel
+	docker image rm $(IMAGE_NAME)
