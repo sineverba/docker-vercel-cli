@@ -31,8 +31,10 @@ blocks:
           commands:
             - checkout
             - docker build --tag $DOCKER_USERNAME/$DOCKER_IMAGE .
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE npm -v | grep "8.5.1"
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE vercel -v | grep "24.0.0"
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE cat /etc/os-release | grep "Alpine Linux v3.16"
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE node -v | grep "18.12.1"
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE npm -v | grep "9.2.0"
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE vercel -v | grep "28.10.1"
 
 promotions:
   - name: Deploy
