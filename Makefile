@@ -1,6 +1,6 @@
 IMAGE_NAME=sineverba/vercel-cli
 CONTAINER_NAME=vercel-cli
-VERSION=1.1.0-dev
+VERSION=1.2.0-dev
 
 build:
 	docker build --tag $(IMAGE_NAME):$(VERSION) .
