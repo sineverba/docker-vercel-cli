@@ -1,6 +1,6 @@
 version: v1.0
 
-name: Build and deploy Pipeline
+name: Build and deploy
 agent:
   machine:
     type: e1-standard-2
@@ -23,9 +23,9 @@ global_job_config:
     - name: DOCKER_IMAGE
       value: vercel-cli
     - name: BUILDX_VERSION
-      value: 0.7.1
+      value: 0.10.0
     - name: BINFMT_VERSION
-      value: qemu-v6.2.0-25
+      value: qemu-v7.0.0-28
 
 blocks:
   - name: 'Build and deploy'
@@ -42,4 +42,8 @@ blocks:
             - docker buildx ls
             - docker buildx create --name multiarch --driver docker-container --use
             - docker buildx inspect --bootstrap --builder multiarch
-            - docker buildx build --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 --tag $DOCKER_USERNAME/$DOCKER_IMAGE:$SEMAPHORE_GIT_TAG_NAME --tag $DOCKER_USERNAME/$DOCKER_IMAGE:latest --push .
+            - >-
+              docker buildx build 
+              --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 
+              --tag $DOCKER_USERNAME/$DOCKER_IMAGE:$SEMAPHORE_GIT_TAG_NAME 
+              --tag $DOCKER_USERNAME/$DOCKER_IMAGE:latest --push "."
