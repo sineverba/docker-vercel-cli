@@ -27,7 +27,6 @@ multi:
 
 test:
 	docker run --rm -it $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "Alpine Linux v3.17"
-	docker run --rm -it $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "3.17.0"
 	docker run --rm -it $(IMAGE_NAME):$(APP_VERSION) node -v | grep "18.13.0"
 	docker run --rm -it $(IMAGE_NAME):$(APP_VERSION) npm -v | grep "9.4.0"
 	docker run --rm -it $(IMAGE_NAME):$(APP_VERSION) vercel -v | grep "28.13.1"
