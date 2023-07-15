@@ -1,6 +1,6 @@
 IMAGE_NAME=sineverba/vercel-cli
 CONTAINER_NAME=vercel-cli
-APP_VERSION=1.3.0-dev
+APP_VERSION=1.4.0-dev
 BUILDX_VERSION=0.11.1
 BINFMT_VERSION=qemu-v7.0.0-28
 
