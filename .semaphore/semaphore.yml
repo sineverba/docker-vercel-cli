@@ -31,7 +31,8 @@ blocks:
           commands:
             - checkout
             - docker build --tag $DOCKER_USERNAME/$DOCKER_IMAGE "."
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE cat /etc/os-release | grep "Alpine Linux v3.17"
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE cat /etc/os-release | grep "Alpine Linux v3.18"
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE cat /etc/os-release | grep "3.18.2"
             - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE node -v | grep "18.16.1"
             - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE npm -v | grep "9.8.0"
             - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE vercel -v | grep "31.0.3"
