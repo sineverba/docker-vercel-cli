@@ -20,6 +20,15 @@ global_job_config:
       value: sineverba
     - name: DOCKER_IMAGE
       value: vercel-cli
+    - name: NODE_VERSION
+      value: 20.10.0
+    - name: NPM_VERSION
+      value: 10.2.5
+    - name: VERCEL_CLI_VERSION
+      value: 32.7.2
+    - name: ALPINE_VERSION
+      value: 3.19.0
+
 
 blocks:
   - name: 'Build and test'
@@ -30,12 +39,18 @@ blocks:
         - name: 'Build and test'
           commands:
             - checkout
-            - docker build --tag $DOCKER_USERNAME/$DOCKER_IMAGE "."
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE cat /etc/os-release | grep "Alpine Linux v3.18"
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE cat /etc/os-release | grep "3.18.2"
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE node -v | grep "18.16.1"
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE npm -v | grep "9.8.0"
-            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE vercel -v | grep "31.0.3"
+            - >
+              docker build 
+              --build-arg NODE_VERSION=$NODE_VERSION 
+              --build-arg NPM_VERSION=$NPM_VERSION 
+              --build-arg VERCEL_CLI_VERSION=$VERCEL_CLI_VERSION 
+              --tag $DOCKER_USERNAME/$DOCKER_IMAGE 
+              "."
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE cat /etc/os-release | grep "Alpine Linux"
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE cat /etc/os-release | grep $ALPINE_VERSION
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE node -v | grep $NODE_VERSION
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE npm -v | grep $NPM_VERSION
+            - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE vercel -v | grep $VERCEL_CLI_VERSION
 
 promotions:
   - name: Deploy
