@@ -59,8 +59,8 @@ blocks:
             - >-
               docker buildx build 
               --build-arg NODE_VERSION=$NODE_VERSION 
-		          --build-arg NPM_VERSION=$NPM_VERSION 
-		          --build-arg VERCEL_CLI_VERSION=$VERCEL_CLI_VERSION 
+              --build-arg NPM_VERSION=$NPM_VERSION 
+              --build-arg VERCEL_CLI_VERSION=$VERCEL_CLI_VERSION 
               --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 
               --tag $DOCKER_USERNAME/$DOCKER_IMAGE:$SEMAPHORE_GIT_TAG_NAME 
               --tag $DOCKER_USERNAME/$DOCKER_IMAGE:latest --push "."
