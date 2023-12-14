@@ -23,9 +23,17 @@ global_job_config:
     - name: DOCKER_IMAGE
       value: vercel-cli
     - name: BUILDX_VERSION
-      value: 0.11.1
+      value: 0.12.0
     - name: BINFMT_VERSION
       value: qemu-v7.0.0-28
+    - name: NODE_VERSION
+      value: 20.10.0
+    - name: NPM_VERSION
+      value: 10.2.5
+    - name: VERCEL_CLI_VERSION
+      value: 32.7.2
+    - name: ALPINE_VERSION
+      value: 3.19.0
 
 blocks:
   - name: 'Build and deploy'
@@ -50,6 +58,9 @@ blocks:
             - docker buildx inspect --bootstrap --builder multiarch
             - >-
               docker buildx build 
+              --build-arg NODE_VERSION=$NODE_VERSION 
+		          --build-arg NPM_VERSION=$NPM_VERSION 
+		          --build-arg VERCEL_CLI_VERSION=$VERCEL_CLI_VERSION 
               --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 
               --tag $DOCKER_USERNAME/$DOCKER_IMAGE:$SEMAPHORE_GIT_TAG_NAME 
               --tag $DOCKER_USERNAME/$DOCKER_IMAGE:latest --push "."
