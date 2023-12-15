@@ -1,4 +1,7 @@
-# 1.5.0
+# 1.5.1
++ Fix Semaphore timeout
+
+## 1.5.0
 + Upgrade dependencies
 
 ## 1.4.0
