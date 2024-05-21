@@ -134,8 +134,8 @@ jobs:
 workflows:
   test_and_build_images:
     jobs:
-      - build_and_test_amd64
-          #context: SECRETS
+      - build_and_test_amd64:
+          context: SECRETS
           #filters:
           #  branches:
           #    only:
