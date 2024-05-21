@@ -1,18 +1,33 @@
 IMAGE_NAME=sineverba/vercel-cli
 CONTAINER_NAME=vercel-cli
-APP_VERSION=1.5.0-dev
-NODE_VERSION=20.10.0
-NPM_VERSION=10.2.5
-VERCEL_CLI_VERSION=32.7.2
-ALPINE_VERSION=3.19.0
+APP_VERSION=1.6.0-dev
+NODE_VERSION=20.13.1
+NPM_VERSION=10.8.0
+VERCEL_CLI_VERSION=34.2.0
+ALPINE_VERSION=3.19.1
 BUILDX_VERSION=0.12.0
 BINFMT_VERSION=qemu-v7.0.0-28
+
+devbuild:
+	docker build \
+		--tag $(IMAGE_NAME):$(APP_VERSION) \
+		--file dockerfiles/development/Dockerfile \
+		"."
+
+devspin:
+	docker run \
+		--rm -it \
+		--name $(CONTAINER_NAME) \
+		--entrypoint /bin/sh \
+		$(IMAGE_NAME):$(APP_VERSION)
+
 
 build:
 	docker build \
 		--build-arg NODE_VERSION=$(NODE_VERSION) \
 		--build-arg NPM_VERSION=$(NPM_VERSION) \
 		--build-arg VERCEL_CLI_VERSION=$(VERCEL_CLI_VERSION) \
+		--file dockerfiles/production/Dockerfile \
 		--tag $(IMAGE_NAME):$(APP_VERSION) "."
 
 preparemulti:
@@ -35,6 +50,7 @@ multi:
 		--platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 \
 		--tag $(IMAGE_NAME):$(APP_VERSION) \
 		--tag $(IMAGE_NAME):latest \
+		--file dockerfiles/production/Dockerfile \
 		"."
 
 test:

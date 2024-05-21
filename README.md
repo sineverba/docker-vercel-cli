@@ -6,21 +6,31 @@ Docker Vercel CLI
 | CD / CI   | Status |
 | --------- | ------ |
 | Semaphore CI | [![Build Status](https://sineverba.semaphoreci.com/badges/docker-vercel-cli/branches/master.svg)](https://sineverba.semaphoreci.com/projects/docker-vercel-cli) |
+| CircleCI | [![CircleCI](https://dl.circleci.com/status-badge/img/gh/sineverba/docker-vercel-cli/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/sineverba/docker-vercel-cli/tree/master) |
+
+## Available architectures
+
++ linux/arm64
++ linux/arm/v6
++ linux/arm/v7
+
+## Setup for development
+
+[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/sineverba/docker-vercel-cli)
+
+Or
+
+1. Install VSCode extension "Dev Containers"
+
+2. Clone and open up the repository in VSCode, then, you should see the following notification:
+
+![VSCode popup](./.devcontainer/folder.webp)
+
+3. Click on "Reopen in Container"
+
+4. Enjoy! :smiling_face_with_heart_eyes:
 
 
-## Usage
+## How to use
 
-`$ docker run --rm -it sineverba/vercel-cli:1.5.0 vercel [COMMAND]`
-
-
-## Github / image tags and versions
-
-| Github / Docker Image tag | Node Version | NPM Version | Vercel version | Architecture |
-| ------------------------- | ------------ | ----------- | -------------- | ------------ |
-| latest | 20.10.0 | 10.2.5 | 32.7.2 | linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 |
-| 1.5.0 | 20.10.0 | 10.2.5 | 32.7.2 | linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 |
-| 1.4.0 | 18.16.1 | 9.8.0 | 31.0.3 | linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 |
-| 1.3.0 | 18.13.0 | 9.4.0 | 28.13.1 | linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 |
-| 1.2.0 | 18.12.1 | 9.2.0 | 28.10.1 | linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 |
-| 1.1.0 | 16.14.0 | 8.5.1 | 24.0.0 | linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 |
-| 1.0.0 | 16.12.0 | n.a. | 23.1.2 | linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 |
+`$ docker run --rm -it sineverba/vercel-cli:1.6.0 vercel [COMMAND]`

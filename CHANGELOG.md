@@ -1,4 +1,9 @@
-# 1.5.1
+# 1.6.0
++ Move to `devcontainer`
++ Add build on `.circleci`
++ Upgrade dependencies
+
+## 1.5.1
 + Fix Semaphore timeout
 
 ## 1.5.0

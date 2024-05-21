@@ -1,2 +1,6 @@
-*
-!Dockerfile
+.circleci/
+.devcontainer/
+.semaphore/
+*.md
+LICENSE
+Makefile
