@@ -33,4 +33,4 @@ Or
 
 ## How to use
 
-`$ docker run --rm -it sineverba/vercel-cli:1.5.0 vercel [COMMAND]`
+`$ docker run --rm -it sineverba/vercel-cli:1.6.0 vercel [COMMAND]`
