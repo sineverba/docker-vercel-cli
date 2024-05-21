@@ -1,8 +1,8 @@
-ARG NODE_VERSION=20.10.0
+ARG NODE_VERSION
 FROM node:${NODE_VERSION}-alpine3.19
 # Set versions
-ARG NPM_VERSION=10.2.5
-ARG VERCEL_CLI_VERSION=32.7.2
+ARG NPM_VERSION
+ARG VERCEL_CLI_VERSION
 # Update and upgrade
 RUN apk update && \
     apk add --upgrade apk-tools && \
