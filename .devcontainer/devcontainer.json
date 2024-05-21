@@ -1,0 +1,7 @@
+{
+  "name": "docker-vercel-cli",
+  "build": {
+    "dockerfile": "../dockerfiles/development/Dockerfile",
+    "context": ".."
+  }
+}

@@ -1,6 +1,6 @@
 version: v1.0
 
-name: Test
+name: Build and test Pipeline
 agent:
   machine:
     type: e1-standard-2
@@ -10,10 +10,6 @@ global_job_config:
 
   secrets:
     - name: ACCESS_TOKENS
-
-  prologue:
-    commands:
-      - echo $DOCKER_TOKEN | docker login --username "$DOCKER_USERNAME" --password-stdin
 
   env_vars:
     - name: DOCKER_USERNAME
@@ -51,9 +47,3 @@ blocks:
             - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE node -v | grep $NODE_VERSION
             - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE npm -v | grep $NPM_VERSION
             - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE vercel -v | grep $VERCEL_CLI_VERSION
-
-promotions:
-  - name: Deploy
-    pipeline_file: build-deploy.yml
-    auto_promote:
-      when: "result = 'passed' and tag =~ '.*'"
