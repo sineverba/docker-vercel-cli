@@ -16,12 +16,35 @@ executors:
     resource_class: medium
     environment:
       DOCKER_IMAGE: vercel-cli
+      ALPINE_VERSION: 3.19.0
       NODE_VERSION: 20.10.0
       NPM_VERSION: 10.2.5
       VERCEL_CLI_VERION: 32.7.2
       BINFMT_VERSION: qemu-v8.1.5-43
       DELETE_TAG_TAG: 1.0.2
 jobs:
+  build_master_amd64:
+    executor: amd64_executor
+    steps:
+      - checkout
+      - run:
+          name: "Build image and test"
+          command: |
+            docker build \
+            --build-arg NODE_VERSION=$NODE_VERSION \
+            --build-arg NPM_VERSION=$NPM_VERSION \
+            --build-arg VERCEL_CLI_VERSION=$VERCEL_CLI_VERSION \
+            --tag $DOCKER_LOGIN/$DOCKER_IMAGE:test \
+            --file dockerfiles/production/Dockerfile \
+            "."
+      - run:
+          name: "Test image"
+          command: |
+            docker run --rm $DOCKER_LOGIN/$DOCKER_IMAGE:test cat /etc/os-release | grep "Alpine Linux"
+            docker run --rm $DOCKER_LOGIN/$DOCKER_IMAGE:test cat /etc/os-release | grep $ALPINE_VERSION
+            docker run --rm $DOCKER_LOGIN/$DOCKER_IMAGE:test node -v | grep $NODE_VERSION
+            docker run --rm $DOCKER_LOGIN/$DOCKER_IMAGE:test npm -v | grep $NPM_VERSION
+            docker run --rm $DOCKER_LOGIN/$DOCKER_IMAGE:test vercel -v | grep $VERCEL_CLI_VERSION
   build_arm64:
     executor: arm64_executor
     steps:
@@ -111,6 +134,12 @@ jobs:
 workflows:
   test_and_build_images:
     jobs:
+      - build_master_amd64:
+          #context: SECRETS
+          #filters:
+          #  branches:
+          #    only:
+          #      - master
       - build_arm64:
           context: SECRETS
           filters:
