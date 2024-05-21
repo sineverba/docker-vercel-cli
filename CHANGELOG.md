@@ -1,4 +1,4 @@
-# Next version
+# 1.6.0
 + Move to `devcontainer`
 + Add build on `.circleci`
 + Upgrade dependencies
