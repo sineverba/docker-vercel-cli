@@ -23,7 +23,7 @@ executors:
       BINFMT_VERSION: qemu-v8.1.5-43
       DELETE_TAG_TAG: 1.0.2
 jobs:
-  build_master_amd64:
+  build_and_test_amd64:
     executor: amd64_executor
     steps:
       - checkout
@@ -134,7 +134,7 @@ jobs:
 workflows:
   test_and_build_images:
     jobs:
-      - build_master_amd64:
+      - build_and_test_amd64
           #context: SECRETS
           #filters:
           #  branches:
